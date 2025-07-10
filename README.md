@@ -6,7 +6,7 @@ lexicons and query them for rhymes.
 ## build_lexicon.py
 
 ```
-python build_lexicon.py --lexique Lexique382.txt \
+python build_lexicon.py --lexique Lexique383.tsv \
                         --glaff glaff.tsv \
                         --dela fra.delaf.txt.gz \
                         --lefff lefff.tsv \

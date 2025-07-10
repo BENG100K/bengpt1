@@ -61,7 +61,7 @@ def build_index(output: str, frames: list[pd.DataFrame]) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Build merged French lexicon")
-    parser.add_argument("--lexique", required=True, help="Lexique382.txt path")
+    parser.add_argument("--lexique", required=True, help="Lexique383.tsv path")
     parser.add_argument("--glaff", required=False, help="GLAFF.tsv path")
     parser.add_argument("--dela", required=False, help="fra.delaf.txt.gz path")
     parser.add_argument("--lefff", required=False, help="lefff.tsv path")

@@ -5,7 +5,7 @@ DEST="${1:-/Users/bengpt/Downloads/DATASET_LINGUISTIQUE}"
 mkdir -p "$DEST"
 
 curl -L https://raw.githubusercontent.com/pmichel31415/openlexicon/master/lexique383/Lexique383.tsv \
-    -o "$DEST/Lexique382.txt"
+    -o "$DEST/Lexique383.tsv"
 
 curl -L https://raw.githubusercontent.com/bootphon/glaff/master/glaff-2.1.tsv \
     -o "$DEST/glaff.tsv"

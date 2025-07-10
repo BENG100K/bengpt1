@@ -32,7 +32,6 @@ def find_cover(target: str, max_branch: int = 5):
             return memo[i]
         out = []
         for L in range(len(ipa) - i, 0, -1):
-            key = ''.join(ipa[i:i+L])
             candidates = COVER_IX.get(L, [])
             hits = [w for w in candidates if split_phonemes(w) == ipa[i:i+L]][:max_branch]
             if not hits:
