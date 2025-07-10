@@ -2,7 +2,6 @@ import argparse
 import gzip
 import pandas as pd
 import re
-from glob import glob
 from phonemizer import phonemize
 
 PH_DISCRET = {"ə", "j", "w"}
