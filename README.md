@@ -19,12 +19,15 @@ parquet file indexed by the last ten phonemes.
 
 ## rimotron.py
 
+The rhyme assistant exposes two subcommands:
+
 ```
-python rimotron.py "amour toujours" --lexicon lex_master.parquet
+python rimotron.py cover "amour toujours" --lexicon lex_master.parquet
+python rimotron.py rhyme amour --lexicon lex_master.parquet --min-syl 3
 ```
 
-This loads the parquet file and prints possible homophone covers for
-each word in the phrase.
+`cover` searches for homophone coverings of each word in the phrase, while
+`rhyme` lists words sharing the same final phonemes.
 
 
 ## Downloading datasets
