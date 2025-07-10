@@ -1,0 +1,22 @@
+{
+  "Lexique383": {
+    "url": "https://raw.githubusercontent.com/pmichel31415/openlexicon/master/lexique383/Lexique383.tsv",
+    "path": "Lexique383.tsv",
+    "md5": null
+  },
+  "glaff": {
+    "url": "https://raw.githubusercontent.com/bootphon/glaff/master/glaff-2.1.tsv",
+    "path": "glaff.tsv",
+    "md5": null
+  },
+  "dela": {
+    "url": "https://raw.githubusercontent.com/lethexfan/dela/master/fra.delaf.txt.gz",
+    "path": "fra.delaf.txt.gz",
+    "md5": null
+  },
+  "lefff": {
+    "url": "https://raw.githubusercontent.com/colinbenne/lefff/master/lefff.tsv",
+    "path": "lefff.tsv",
+    "md5": null
+  }
+}
