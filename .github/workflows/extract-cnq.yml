@@ -1,0 +1,40 @@
+name: Extract Quebec notaries
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          python -m playwright install --with-deps chromium
+
+      - name: Run Quebec-wide extraction
+        run: |
+          python extract_notaires_cnq.py --max-pages 400 --workers 4 --delay-ms 650 --output notaires_quebec.csv
+
+      - name: Upload CSV and diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: notaires-quebec
+          path: |
+            notaires_quebec.csv
+            profile_urls.txt
+            errors.txt
+          if-no-files-found: warn
