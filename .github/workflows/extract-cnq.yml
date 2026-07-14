@@ -28,10 +28,13 @@ jobs:
         run: |
           python extract_notaires_cnq.py --city "Lévis" --radius 50 --output notaires_cnq.csv
 
-      - name: Upload CSV
+      - name: Upload results and diagnostics
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: notaires-cnq
-          path: notaires_cnq.csv
+          path: |
+            notaires_cnq.csv
+            debug-cnq.png
+            debug-cnq.html
           if-no-files-found: warn
