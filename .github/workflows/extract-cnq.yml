@@ -1,4 +1,4 @@
-name: Extract CNQ notaires
+name: Extract Quebec notaries
 
 on:
   pull_request:
@@ -8,25 +8,10 @@ on:
 jobs:
   extract:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 180
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Test CNQ with curl
-        continue-on-error: true
-        run: |
-          set -x
-          curl -sS -D curl-headers.txt -o curl-body.html \
-            -L --max-time 45 \
-            -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36" \
-            -H "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8" \
-            -H "Accept-Language: fr-CA,fr;q=0.9,en;q=0.7" \
-            -H "Cache-Control: no-cache" \
-            -w "\nHTTP_CODE=%{http_code}\nFINAL_URL=%{url_effective}\nCONTENT_TYPE=%{content_type}\nSIZE=%{size_download}\n" \
-            https://trouverunnotaire.cnq.org/ | tee curl-summary.txt
-          head -n 80 curl-headers.txt || true
-          head -n 80 curl-body.html || true
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -39,21 +24,17 @@ jobs:
           pip install -r requirements.txt
           python -m playwright install --with-deps chromium
 
-      - name: Run extraction
-        continue-on-error: true
+      - name: Run Quebec-wide extraction
         run: |
-          python extract_notaires_cnq.py --city "Lévis" --radius 50 --output notaires_cnq.csv
+          python extract_notaires_cnq.py --max-pages 400 --workers 4 --delay-ms 650 --output notaires_quebec.csv
 
-      - name: Upload results and diagnostics
+      - name: Upload CSV and diagnostics
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: notaires-cnq
+          name: notaires-quebec
           path: |
-            notaires_cnq.csv
-            debug-cnq.png
-            debug-cnq.html
-            curl-headers.txt
-            curl-body.html
-            curl-summary.txt
+            notaires_quebec.csv
+            profile_urls.txt
+            errors.txt
           if-no-files-found: warn
